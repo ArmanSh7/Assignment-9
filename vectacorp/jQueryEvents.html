@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment 9- section 2</title>
+    <link href="styles/normalize.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="./JS/jquery-3.6.1.js"></script>
+    <script type="text/javascript">
+      $(document).ready(() => {
+        $("body").append("<div class='div1'>Div tag<div>");
+
+        // part 1
+        $("body").append(
+          "<button type='button' class='buttonClick'>Click method button!</button>"
+        );
+
+        $(".buttonClick").click(() => {
+          window.alert("Button is clicked with click method!");
+        });
+
+        // part 2
+        $("body").append(
+          "<button type='button' class='bindButton'>Bind method button!</button>"
+        );
+
+        $(".bindButton").bind("click", () => {
+          window.alert("Button is clicked with bind method!");
+        });
+
+        // part 3
+        $("body").append(
+          "<button type='button' class='onButton'>Click with on method button!</button>"
+        );
+
+        $("body").on("click", ".onButton", () => {
+          window.alert("Button is clicked with on method!");
+        });
+
+        // part 4
+        $("body").append(
+          "<button type='button' class='singleHandlerButton1'>Button 1 using single handler on method</button>"
+        );
+
+        $("body").append(
+          "<button type='button' class='singleHandlerButton2'>Button 2 using single handler on method</button>"
+        );
+
+        $("body").on(
+          {
+            click: () => {
+              window.alert("Button is clicked with single handler on method!");
+            },
+          },
+          ".singleHandlerButton1, .singleHandlerButton2"
+        );
+
+        // part 5
+        $(".div1")
+          .css({
+            "background-color": "green",
+            display: "inline",
+            width: "400px",
+            height: "400px",
+            marginRight: "30px",
+          })
+          .on({
+            mouseenter: () => {
+              window.console.log("The mouse entered div tag!");
+            },
+            mouseleave: () => {
+              window.console.log("The mouse left div tag!");
+            },
+            click: () => {
+              window.console.log("Div tag is clicked");
+            },
+          });
+
+        //Rewriting last part
+        $("body").append("<span>Span Tag</span>");
+        $("span").css({
+          "background-color": "lightBlue",
+          display: "inline-block",
+          width: "200px",
+          height: "40px",
+          margin: "50px",
+        });
+
+        $(".div1").on({
+          mouseenter: () => {
+            $("span").text("The mouse entered div tag!");
+          },
+          mouseleave: () => {
+            $("span").text("The mouse left div tag!");
+          },
+          click: () => {
+            $("span").text("Div tag is clicked");
+          },
+        });
+
+        $("button").css("margin", "20px").css("float", "inline-block");
+        $(".div1").css("float", "left");
+
+        // Part 7
+        $("body").append("<a href='https://modulemedia.com'>modulemedia</a>");
+
+        $("a").click(function (event) {
+          event.preventDefault();
+          $("a").css("color", "red");
+          window.alert(event.target.nodeName + " - triggered the event!");
+        });
+
+        // Part 8
+        $("body").append("<div class='div2'>Div tag 2<div>");
+        $(".div2").css({
+          width: "250px",
+          height: "40px",
+          margin: "10px",
+          display: "flex",
+        });
+
+        $(window).on("resize", () => {
+          $(".div2").text(
+            "Height: " +
+              $(window).height() +
+              "px and Width: " +
+              $(window).width() +
+              "px"
+          );
+        });
+
+        // Part 9
+        $("form input").css({ margin: "30px 30px" }).css("display", "flex");
+        $("body").append(
+          "<label>Part 9: Input text: <input class ='part9' type='text' /></label>"
+        );
+
+        $(".part9").on("focusin", () => {
+          $(".part9").css("background-color", "lightBlue");
+        });
+
+        $(".part9").on({
+          focusin: () => {
+            $(".part9").css("background-color", "lightBlue");
+          },
+          focusout: () => {
+            $(".part9").css("background-color", "white");
+          },
+        });
+
+        // Part 10
+        $("body").append(
+          "<form><label>Name: <input type='text' id='name' /></label><label>Email: <input type='email' /></label><input type='submit' value='submit'/></form>"
+        );
+
+        // Changing back input border to default for another submission
+        $("form #name").keypress("click", () => {
+          $("form #name").css("border", "1px solid black");
+          $("input[type=email]").css("border", "1px solid black");
+        });
+
+        $("input[type=email]").keypress("click", () => {
+          $("form #name").css("border", "1px solid black");
+          $("input[type=email]").css("border", "1px solid black");
+        });
+
+        $("form").css("display", "flex").css("margin", "100px");
+
+        $("body").on("click", "input[type=submit]", (event) => {
+          if ($("#name").val() == "" && $("input[type=email]").val() == "") {
+            window.alert(
+              "Filling both field is required! Please enter your name and email!"
+            );
+          } else if ($("#name").val() == "") {
+            window.alert(
+              "Filling both field is required! Please enter your name!"
+            );
+            event.preventDefault();
+          } else if ($("input[type=email]").val() == "") {
+            window.alert(
+              "Filling both field is required! Please enter your email!"
+            );
+            event.preventDefault();
+          } else {
+            event.preventDefault();
+            $("form #name").css("border", "3px solid green");
+            $("input[type=email]").css("border", "3px solid green");
+            $("form #name").val("");
+            $("input[type=email]").val("");
+            nameCounter = 0;
+            emailCounter = 0;
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <section></section>
+  </body>
+</html>
